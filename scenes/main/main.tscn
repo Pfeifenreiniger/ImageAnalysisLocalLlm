@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhrdc4njrdro7"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_3r75w"]
+[ext_resource type="PackedScene" uid="uid://brt72npi0cnvm" path="res://scenes/ui/ui.tscn" id="1_2800x"]
+[ext_resource type="PackedScene" uid="uid://43vd61jw5e71" path="res://scenes/managers/llm_request_manager/llm_request_manager.tscn" id="2_ryq88"]
+[ext_resource type="Texture2D" uid="uid://dlceot87dyv8g" path="res://assets/icons/grip-horizontal-white.svg" id="4_gqr8s"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3r75w")
+
+[node name="Ui" parent="." node_paths=PackedStringArray("llm_request_manager") instance=ExtResource("1_2800x")]
+layout_mode = 1
+llm_request_manager = NodePath("../LlmRequestManager")
+
+[node name="LlmRequestManager" parent="." instance=ExtResource("2_ryq88")]
+
+[node name="WindowGrabber" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(23, 9)
+scale = Vector2(3.14286, 2.9)
+texture = ExtResource("4_gqr8s")
+
+[node name="MouseOverDetectRect" type="ColorRect" parent="WindowGrabber"]
+offset_left = -7.0
+offset_top = -3.0
+offset_right = 22.0
+offset_bottom = 4.0
+color = Color(1, 1, 1, 0)

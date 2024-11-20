@@ -1,0 +1,127 @@
+[gd_scene load_steps=9 format=3 uid="uid://brt72npi0cnvm"]
+
+[ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_5cwx2"]
+[ext_resource type="Texture2D" uid="uid://nh0aj7wsxg57" path="res://assets/icons/file-earmark-plus-white.svg" id="2_2s6il"]
+[ext_resource type="Theme" uid="uid://b8sd7hjwn3x6" path="res://assets/theme/main_theme.tres" id="2_sqlfe"]
+[ext_resource type="Script" path="res://scenes/ui/image_preview.gd" id="3_7dq80"]
+[ext_resource type="Texture2D" uid="uid://b85mfjd4xmid5" path="res://assets/icons/copy-white.svg" id="3_knwwh"]
+[ext_resource type="Texture2D" uid="uid://dns5epagv3mr4" path="res://assets/icons/send-white.svg" id="3_ubsgm"]
+[ext_resource type="Texture2D" uid="uid://bde0yrufh2ru3" path="res://assets/icons/x-circle-white.svg" id="6_d3xbj"]
+[ext_resource type="PackedScene" uid="uid://bhqql85a1wqtl" path="res://scenes/ui/loading_bar/loading_bar.tscn" id="8_ufec5"]
+
+[node name="Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5cwx2")
+
+[node name="UserPrompt" type="TextEdit" parent="."]
+layout_mode = 1
+offset_left = 40.0
+offset_top = 16.0
+offset_right = 1240.0
+offset_bottom = 413.0
+theme = ExtResource("2_sqlfe")
+placeholder_text = "Your prompt..."
+wrap_mode = 1
+
+[node name="ResponseField" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 523.0
+offset_right = 1240.0
+offset_bottom = 1177.0
+tooltip_text = "The LLM's image analysis"
+theme = ExtResource("2_sqlfe")
+placeholder_text = "LLM response..."
+editable = false
+wrap_mode = 1
+
+[node name="CopyButton" type="Button" parent="ResponseField"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = -24.0
+offset_right = -6.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "Copy LLM response to clipboard"
+icon = ExtResource("3_knwwh")
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+position = Vector2i(1200, 300)
+size = Vector2i(800, 600)
+exclusive = false
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+
+[node name="ShowFileDialogButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1537.0
+offset_top = 125.0
+offset_right = 1692.0
+offset_bottom = 156.0
+tooltip_text = "Open explorer window to browse for image file"
+theme = ExtResource("2_sqlfe")
+text = "Open file-menu"
+icon = ExtResource("2_2s6il")
+
+[node name="SendButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 572.0
+offset_top = 433.0
+offset_right = 683.0
+offset_bottom = 464.0
+tooltip_text = "Send your prompt with your selected image file to LLM for analysis"
+theme = ExtResource("2_sqlfe")
+text = "Send"
+icon = ExtResource("3_ubsgm")
+
+[node name="ImagePreview" type="Sprite2D" parent="."]
+position = Vector2(1354, 209)
+centered = false
+script = ExtResource("3_7dq80")
+
+[node name="MouseHoverDetectRect" type="ColorRect" parent="ImagePreview"]
+size_flags_horizontal = 0
+size_flags_vertical = 8
+color = Color(0, 0.870588, 0.87451, 0)
+
+[node name="RemoveTextureButton" type="Button" parent="ImagePreview"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_bottom = 31.0
+grow_horizontal = 0
+tooltip_text = "Close Image"
+theme = ExtResource("2_sqlfe")
+icon = ExtResource("6_d3xbj")
+
+[node name="CloseProgramButton" type="Button" parent="."]
+layout_mode = 1
+offset_left = 1970.0
+offset_top = 10.0
+offset_right = 1990.0
+offset_bottom = 30.0
+tooltip_text = "Close program"
+theme = ExtResource("2_sqlfe")
+icon = ExtResource("6_d3xbj")
+
+[node name="LoadingBar" parent="." instance=ExtResource("8_ufec5")]
+layout_mode = 0
+offset_left = 442.0
+offset_top = 485.0
+offset_right = 861.0
+offset_bottom = 503.0
